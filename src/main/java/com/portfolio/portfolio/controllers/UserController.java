@@ -30,16 +30,9 @@ public class UserController {
     
     @PostMapping("/auth/save/user")
     public ResponseEntity<User> saveUser(@RequestBody User user){
-        User n_user=service.getUserByName(user.getName());
-        if(n_user==null){
-            String pass=passwordEncoder.encode(user.getPassword());
-            user.setPassword(pass);
-            service.saveUser(user);
-        }else{
-            String pass=passwordEncoder.encode(user.getPassword());
-            n_user.setPassword(pass);
-            service.saveUser(n_user);
-        }
+        String pass=passwordEncoder.encode(user.getPassword());
+        user.setPassword(pass);
+        service.saveUser(user);
        return new ResponseEntity(user,HttpStatus.OK);
     }
 }
