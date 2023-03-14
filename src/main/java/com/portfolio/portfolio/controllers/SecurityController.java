@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +51,11 @@ public class SecurityController {
         
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }    
+    //Comprueba si el servicio esta levantado, sin que me bloquee springoboot y probar en navegador
+    @GetMapping("/auth/verificar")
+    public ResponseEntity<String> Verificar(){
         
+        return new ResponseEntity("Servicio exitoso!!", HttpStatus.OK);
+    }    
    
 }
