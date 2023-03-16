@@ -33,7 +33,6 @@ com\portfolio\portfolio\services\ExperienceService.class
 com\portfolio\portfolio\models\Certificate.class
 com\portfolio\portfolio\repositorys\CertificateRepository.class
 com\portfolio\portfolio\services\CertificateServiceImpl.class
-com\portfolio\portfolio\services\SendMailService.class
 com\portfolio\portfolio\models\Perfil.class
 com\portfolio\portfolio\repositorys\ExperienceRepository.class
 com\portfolio\portfolio\repositorys\PerfilRepository.class

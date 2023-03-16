@@ -10,7 +10,6 @@ import com.portfolio.portfolio.models.Contact;
 import com.portfolio.portfolio.models.Perfil;
 import com.portfolio.portfolio.models.User;
 import com.portfolio.portfolio.services.PerfilService;
-import com.portfolio.portfolio.services.SendMailService;
 import com.portfolio.portfolio.services.UserService;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -32,7 +31,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -55,8 +53,6 @@ public class PerfilController {
     @Autowired
     PerfilService service;
     
-    @Autowired
-    JavaMailSender javaMailSender;
     @Autowired
     UserService userservice;
     
@@ -171,28 +167,7 @@ public class PerfilController {
         
     }
   
-    @PostMapping("/send/mail/{id}")
-    public ResponseEntity<String> sendMail(@RequestBody Mail mail,@PathVariable Long id){
-        Perfil perfil= service.getPerfilById(id);
-        if(perfil!=null){
-            String email="";
-            for(Contact item:perfil.getContact()){
-                if(item.getType().equals("email")){
-                    email=item.getDetails();
-                }
-            }
-            if(!email.equals("")){
-                SendMailService sev= new SendMailService(email, mail, javaMailSender);
-                sev.start();
-                return new ResponseEntity("true",HttpStatus.OK);
-            }else{
-                return new ResponseEntity("false",HttpStatus.OK);
-            }
-            
-        }else{
-            return new ResponseEntity("false",HttpStatus.OK);
-            }
-    }
+    
 } 
 
 
